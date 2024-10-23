@@ -1,4 +1,128 @@
 ---
+```
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SimpleGame extends JPanel {
+  public SimpleGame() {
+    setBackground(Color.BLACK);
+    setPreferredSize(new Dimension(800, 600));
+  }
+
+  public void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    g.setColor(Color.WHITE);
+    g.drawString("Hello, World!", 100, 100);
+  }
+
+  public static void main(String[] args) {
+    JFrame frame = new JFrame("Simple Game");
+    frame.add(new SimpleGame());
+    frame.pack();
+    frame.setVisible(true);
+  }
+}
+```
+*Example 2: JavaFX Game*
+```
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+
+public class JavaFXGame extends Application {
+  public void start(Stage primaryStage) {
+    Pane root = new Pane();
+    root.getChildren().add(new Text("Hello, World!", 100, 100));
+    Scene scene = new Scene(root, 800, 600, Color.BLACK);
+    primaryStage.setTitle("JavaFX Game");
+    primaryStage.setScene(scene);
+    primaryStage.show();
+  }
+
+  public static void main(String[] args) {
+    launch(args);
+  }
+}
+```
+*Example 3: libGDX Game*
+```
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+
+public class libGDXGame extends ApplicationAdapter {
+  private Texture texture;
+
+  public void create() {
+    texture = new Texture("image.png");
+  }
+
+  public void render() {
+    Gdx.gl.glClearColor(1, 0, 0, 1);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    batch.begin();
+    batch.draw(texture, 0, 0);
+    batch.end();
+  }
+}
+```
+```
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+
+public class FacebookLogin {
+  public static void main(String[] args) {
+    FacebookSdk.sdkInitialize();
+    LoginManager loginManager = LoginManager.getInstance();
+    loginManager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+      @Override
+      public void onSuccess(LoginResult loginResult) {
+        System.out.println("Login successful!");
+      }
+      
+      @Override
+      public void onCancel() {
+        System.out.println("Login cancelled!");
+      }
+      
+      @Override
+      public void onError(FacebookException error) {
+        System.out.println("Login error!");
+      }
+    });
+  }
+}
+```
+```
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+
+public class TwitterPost {
+  public static void main(String[] args) {
+    Twitter twitter = TwitterFactory.getSingleton();
+    AccessToken accessToken = new AccessToken("your_access_token", "your_access_token_secret");
+    twitter.setOAuthAccessToken(accessToken);
+    
+    try {
+      twitter.updateStatus("Hello, world!");
+      System.out.println("Tweet posted!");
+    } catch (TwitterException e) {
+      System.out.println("Tweet error!");
+    }
+  }
+}
+```
+
+   
 title: "ion-toolbar"
 ---
 import Props from '@ionic-internal/component-api/v8/toolbar/props.md';
